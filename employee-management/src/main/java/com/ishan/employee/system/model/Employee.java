@@ -1,10 +1,11 @@
 package com.ishan.employee.system.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 
@@ -12,12 +13,11 @@ import java.util.List;
 @Table(name = "employees")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_id")
+    @Column(name = "emp_id")
     private long id;
 
     @Column(name="first_name", nullable = false)
@@ -35,11 +35,12 @@ public class Employee {
     @Column(name="salary")
     private Double salary;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name="dateOfBirth")
     private LocalDate dob;
 
     // Human‑friendly code (e.g., EMP001, EMP002) — generation logic to follow
-    @Column(name="employee_code")
+    @Column(name="employee_code", unique = true)
     private String employeeCode;
 
     @Column(name="city")
@@ -47,88 +48,13 @@ public class Employee {
 
     @ElementCollection
     @CollectionTable(name = "employee_skills", joinColumns = @JoinColumn(name = "employee_id"))
-    @Column(name  = "skills")
+    @Column(name  = "skill")
     private List<String> skills;
 
-//    public long getId() {
-//        return id;
-//    }
-//
-//    public void setId(long id) {
-//        this.id = id;
-//    }
-//
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
-//
-//    public String getEmailId() {
-//        return emailId;
-//    }
-//
-//    public void setEmailId(String emailId) {
-//        this.emailId = emailId;
-//    }
-//
-//    public String getPhoneNumber() {
-//        return phoneNumber;
-//    }
-//
-//    public void setPhoneNumber(String phoneNumber) {
-//        this.phoneNumber = phoneNumber;
-//    }
-//
-//    public Double getSalary() {
-//        return salary;
-//    }
-//
-//    public void setSalary(Double salary) {
-//        this.salary = salary;
-//    }
-//
-//    public LocalDate getDob() {
-//        return dob;
-//    }
-//
-//    public void setDob(LocalDate dob) {
-//        this.dob = dob;
-//    }
-//
-//    public String getEmployeeCode() {
-//        return employeeCode;
-//    }
-//
-//    public void setEmployeeCode(String employeeCode) {
-//        this.employeeCode = employeeCode;
-//    }
-//
-//    public String getCity() {
-//        return city;
-//    }
-//
-//    public void setCity(String city) {
-//        this.city = city;
-//    }
-//
-//    public List<String> getSkills() {
-//        return skills;
-//    }
-//
-//    public void setSkills(List<String> skills) {
-//        this.skills = skills;
-//    }
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true; // default to true
+
+
 
     @Override
     public String toString() {

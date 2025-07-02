@@ -30,11 +30,11 @@ public class EmployeeController {
         Employee savedEmployee = employeeService.saveEmployee(employee);
 
         // Build the URI of the newly created resource
-       /* URI location = ServletUriComponentsBuilder
+        URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedEmployee.getId())
-                .toUri();*/
+                .toUri();
 
         return ResponseEntity.ok().body(savedEmployee);
     }
