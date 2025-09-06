@@ -35,7 +35,6 @@ public class Employee {
     @Column(name="salary")
     private Double salary;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Column(name="dateOfBirth")
     private LocalDate dob;
 
@@ -54,21 +53,18 @@ public class Employee {
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true; // default to true
 
+    @Column(name="pan_card_num", unique = true)
+    private String panCard;
 
+    private String country;
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", emailId='" + emailId + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", salary=" + salary +
-                ", dob=" + dob +
-                ", employeeCode='" + employeeCode + '\'' +
-                ", city='" + city + '\'' +
-                ", skills=" + skills +
-                '}';
-    }
+    private String state;
+
+    private boolean isProjectAssigned;
+
+    private boolean isOnBench;
+
+    @Column(name = "performance_rating")
+    private Double performanceRating;
+
 }
